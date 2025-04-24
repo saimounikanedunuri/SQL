@@ -2,10 +2,6 @@
 ✅ Scenario 1:
 Q: In the customers table, retrieve details of all customers who live in New York and have made more than 3 orders in the last year. List the customer's name, email, and total_orders.
 A:
-
-sql
-Copy
-Edit
 SELECT c.customer_name, c.email, COUNT(o.order_id) AS total_orders
 FROM application.customers c
 JOIN application.orders o ON c.customer_id = o.order_customer_id
@@ -17,10 +13,6 @@ HAVING COUNT(o.order_id) > 3;
 ✅ Scenario 2:
 Q: From the orders table, get all orders where the order_status is 'Completed' and the order_date is between 2023-01-01 and 2023-12-31.
 A:
-
-sql
-Copy
-Edit
 SELECT * 
 FROM application.orders 
 WHERE order_status = 'Completed' 
@@ -29,10 +21,6 @@ WHERE order_status = 'Completed'
 ✅ Scenario 3:
 Q: In the products table, retrieve all product details for products with a price greater than $100 and belonging to the category Electronics.
 A:
-
-sql
-Copy
-Edit
 SELECT * 
 FROM application.products 
 WHERE price > 100 
@@ -41,10 +29,6 @@ WHERE price > 100
 ✅ Scenario 4:
 Q: Fetch all employees who have been with the company for more than 5 years and work in the department Sales. Retrieve their employee_id, name, and hire_date.
 A:
-
-sql
-Copy
-Edit
 SELECT employee_id, name, hire_date
 FROM application.employees 
 WHERE department = 'Sales' 
@@ -53,22 +37,15 @@ WHERE department = 'Sales'
 ✅ Scenario 5:
 Q: Retrieve all transactions where the transaction_type is 'Debit' and the transaction_date is between 2023-01-01 and 2023-06-30.
 A:
-
-sql
-Copy
-Edit
 SELECT * 
 FROM application.transactions 
 WHERE transaction_type = 'Debit' 
   AND transaction_date BETWEEN '2023-01-01' AND '2023-06-30';
+  -------------------------------------------------------------
 2. DISTINCT Keyword
 ✅ Scenario 1:
 Q: Find all distinct cities from the customers table where the customer has made a purchase in the last 6 months.
 A:
-
-sql
-Copy
-Edit
 SELECT DISTINCT city 
 FROM application.customers c
 JOIN application.orders o ON c.customer_id = o.order_customer_id
@@ -77,10 +54,6 @@ WHERE o.order_date >= current_date - interval '6 months';
 ✅ Scenario 2:
 Q: List all distinct product_category values from the products table where the price is greater than $50.
 A:
-
-sql
-Copy
-Edit
 SELECT DISTINCT product_category 
 FROM application.products 
 WHERE price > 50;
@@ -88,10 +61,6 @@ WHERE price > 50;
 ✅ Scenario 3:
 Q: In the orders table, fetch all distinct order_status values for orders placed between 2022-01-01 and 2022-12-31.
 A:
-
-sql
-Copy
-Edit
 SELECT DISTINCT order_status 
 FROM application.orders 
 WHERE order_date BETWEEN '2022-01-01' AND '2022-12-31';
@@ -99,10 +68,6 @@ WHERE order_date BETWEEN '2022-01-01' AND '2022-12-31';
 ✅ Scenario 4:
 Q: Retrieve all distinct payment_methods used by customers in the payments table, where the payment status is Completed.
 A:
-
-sql
-Copy
-Edit
 SELECT DISTINCT payment_method 
 FROM application.payments 
 WHERE payment_status = 'Completed';
@@ -110,24 +75,16 @@ WHERE payment_status = 'Completed';
 ✅ Scenario 5:
 Q: In the sales table, retrieve all distinct regions where sales have been made, and show only the regions with sales above $10,000 in the last quarter.
 A:
-
-sql
-Copy
-Edit
 SELECT DISTINCT region 
 FROM application.sales 
 WHERE sale_date >= current_date - interval '3 months'
 GROUP BY region
 HAVING SUM(sales_amount) > 10000;
+  ------------------------------------------------------------------------------------
 3. ORDER BY Clause
-  
 ✅ Scenario 1:
 Q: List the top 5 highest-paying customers based on the total spent in the last year.
 A:
-
-sql
-Copy
-Edit
 SELECT customer_id, customer_name, SUM(order_total) AS total_spent
 FROM application.orders
 WHERE order_date >= current_date - interval '1 year'
@@ -138,10 +95,6 @@ LIMIT 5;
 ✅ Scenario 2:
 Q: Retrieve all orders ordered by order_date in ascending order.
 A:
-
-sql
-Copy
-Edit
 SELECT * 
 FROM application.orders 
 ORDER BY order_date ASC;
@@ -149,10 +102,6 @@ ORDER BY order_date ASC;
 ✅ Scenario 3:
 Q: List all employees by their hire_date in descending order, and display the first 10 rows.
 A:
-
-sql
-Copy
-Edit
 SELECT * 
 FROM application.employees 
 ORDER BY hire_date DESC 
@@ -161,10 +110,6 @@ LIMIT 10;
 ✅ Scenario 4:
 Q: List the top 10 products based on the quantity_sold from the sales table.
 A:
-
-sql
-Copy
-Edit
 SELECT product_id, product_name, SUM(quantity_sold) AS total_quantity 
 FROM application.sales 
 GROUP BY product_id, product_name
@@ -174,22 +119,14 @@ LIMIT 10;
 ✅ Scenario 5:
 Q: Fetch all transactions ordered by transaction_amount DESC and transaction_date ASC.
 A:
-
-sql
-Copy
-Edit
 SELECT * 
 FROM application.transactions 
 ORDER BY transaction_amount DESC, transaction_date ASC;
+  -----------------------------------------------------------------------
 4. LIMIT Clause
-  
 ✅ Scenario 1:
 Q: Retrieve the top 10 most recent orders.
 A:
-
-sql
-Copy
-Edit
 SELECT * 
 FROM application.orders 
 ORDER BY order_date DESC 
@@ -198,10 +135,6 @@ LIMIT 10;
 ✅ Scenario 2:
 Q: Fetch the first 5 employees ordered by salary in descending order.
 A:
-
-sql
-Copy
-Edit
 SELECT * 
 FROM application.employees 
 ORDER BY salary DESC 
@@ -210,10 +143,6 @@ LIMIT 5;
 ✅ Scenario 3:
 Q: Fetch the top 3 highest-grossing products based on total sales.
 A:
-
-sql
-Copy
-Edit
 SELECT product_id, product_name, SUM(total_sales) AS revenue 
 FROM application.sales 
 GROUP BY product_id, product_name
@@ -223,10 +152,6 @@ LIMIT 3;
 ✅ Scenario 4:
 Q: Display the first 5 customers who made the most purchases.
 A:
-
-sql
-Copy
-Edit
 SELECT * 
 FROM application.customers 
 ORDER BY total_orders DESC 
@@ -235,23 +160,15 @@ LIMIT 5;
 ✅ Scenario 5:
 Q: Fetch the last 5 transactions based on transaction_date.
 A:
-
-sql
-Copy
-Edit
 SELECT * 
 FROM application.transactions 
 ORDER BY transaction_date DESC 
 LIMIT 5;
-  
+  ----------------------------------------------
 5. Combination of SELECT, WHERE, DISTINCT, ORDER BY, and LIMIT
 ✅ Scenario 1:
 Q: Find the top 5 distinct order_status values for orders placed in the last quarter, ordered by number of occurrences.
 A:
-
-sql
-Copy
-Edit
 SELECT order_status, COUNT(*) AS count
 FROM application.orders 
 WHERE order_date >= date_trunc('quarter', current_date) - interval '1 quarter'
@@ -262,10 +179,6 @@ LIMIT 5;
 ✅ Scenario 2:
 Q: List the top 5 most recent orders with total_amount > $500, showing only distinct order_ids.
 A:
-
-sql
-Copy
-Edit
 SELECT DISTINCT order_id, total_amount, order_date 
 FROM application.orders 
 WHERE total_amount > 500 
@@ -275,10 +188,6 @@ LIMIT 5;
 ✅ Scenario 3:
 Q: Fetch distinct product_name where price > $100, ordered by price ascending. Display only 10.
 A:
-
-sql
-Copy
-Edit
 SELECT DISTINCT product_name 
 FROM application.products 
 WHERE price > 100 
@@ -288,10 +197,6 @@ LIMIT 10;
 ✅ Scenario 4:
 Q: Retrieve the first 10 employees who joined in 2022, ordered by hire_date, showing distinct departments.
 A:
-
-sql
-Copy
-Edit
 SELECT DISTINCT department 
 FROM application.employees 
 WHERE EXTRACT(YEAR FROM hire_date) = 2022 
@@ -301,10 +206,6 @@ LIMIT 10;
 ✅ Scenario 5:
 Q: Fetch all distinct product categories where products were sold more than 500 times, ordered by total_sales. Limit 5.
 A:
-
-sql
-Copy
-Edit
 SELECT product_category, SUM(quantity_sold) AS total_sold
 FROM application.sales 
 GROUP BY product_category
